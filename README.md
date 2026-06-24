@@ -156,7 +156,7 @@ paodao/
 
 ```js
 // ===== 基础配置 =====
-CLOUD_ENV_ID: 'cloudbase-d6gcx23kbd0cb49eb'   // ← 替换为你的云环境 ID
+CLOUD_ENV_ID: 'xxxxxxxxx'   // ← 替换为你的云环境 ID
 PLATFORM_FEE_RATE: 0.05                         // 平台抽成比例（5%）
 PAGE_SIZE: 10                                   // 订单列表每页条数
 
