@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6898971f-03b2-462b-a924-9821c2325cb7" name="Changes" comment="内容修改">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/env.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "joker-144"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/joker-144/Running-Knife-Mouse.git",
+    "accountId": "1e24495d-5947-4923-b5cd-8f72f098a8cd"
+  }
+}]]></component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0011533131459274" />
+      <entry key="MS500" value="1.258457684061991" />
+      <entry key="S2" value="1.7130128586820703" />
+      <entry key="S5" value="1.8734518013925574" />
+      <entry key="S10" value="1.9345864333450158" />
+      <entry key="S30" value="1.9777019712371047" />
+      <entry key="S60" value="1.9887881326336316" />
+      <entry key="M2" value="1.9943782643610186" />
+      <entry key="M5" value="1.9977475018624913" />
+      <entry key="M10" value="1.998873115997468" />
+      <entry key="M15" value="1.9992486028312042" />
+      <entry key="M30" value="1.9996242308143617" />
+      <entry key="H1" value="1.9998120977535536" />
+      <entry key="H2" value="1.9999060444629553" />
+      <entry key="H4" value="1.9999530211279706" />
+      <entry key="D1" value="1.9999921700347256" />
+      <entry key="W1" value="1.9999988814297787" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9670503559911234" />
+      <entry key="MS500" value="1.2497648818670355" />
+      <entry key="S2" value="1.7100470040583007" />
+      <entry key="S5" value="1.8721536735073232" />
+      <entry key="S10" value="1.9339160729504188" />
+      <entry key="S30" value="1.977473511342828" />
+      <entry key="S60" value="1.988673259044104" />
+      <entry key="M2" value="1.994320665289831" />
+      <entry key="M5" value="1.9977244231116598" />
+      <entry key="M10" value="1.9988615700869417" />
+      <entry key="M15" value="1.9992409041041814" />
+      <entry key="M30" value="1.9996203807239077" />
+      <entry key="H1" value="1.9998101725265398" />
+      <entry key="H2" value="1.9999050818039952" />
+      <entry key="H4" value="1.9999525397871265" />
+      <entry key="D1" value="1.999992089809673" />
+      <entry key="W1" value="1.9999988699690183" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8,
+  "fromUser": false
+}]]></component>
+  <component name="ProjectId" id="3FZouUSNAfzaSKzlWBLWwHy2Rp3" />
+  <component name="ProjectViewState">
+    <option name="flattenModules" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Study/Running-Knife-Mouse",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.25134.95" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.25134.95" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6898971f-03b2-462b-a924-9821c2325cb7" name="Changes" comment="" />
+      <created>1782292174398</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1782292174398</updated>
+      <workItem from="1782292175443" duration="902000" />
+    </task>
+    <task id="LOCAL-00001" summary="跑刀鼠初始版本v1.0">
+      <option name="closed" value="true" />
+      <created>1782292202775</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1782292202775</updated>
+    </task>
+    <task id="LOCAL-00002" summary="内容修改">
+      <option name="closed" value="true" />
+      <created>1782292485593</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1782292485593</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="跑刀鼠初始版本v1.0" />
+    <MESSAGE value="内容修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="内容修改" />
+  </component>
+</project>
