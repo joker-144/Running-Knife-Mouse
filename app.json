@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/orderPublish/orderPublish",
+    "pages/orderHall/orderHall",
+    "pages/orderDetail/orderDetail",
+    "pages/profile/profile",
+    "pages/verify/verify",
+    "pages/myOrders/myOrders",
+    "pages/chat/chat",
+    "pages/withdraw/withdraw",
+    "pages/admin/admin"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "跑刀鼠",
+    "navigationBarBackgroundColor": "#0A0E17",
+    "navigationStyle": "default",
+    "backgroundColor": "#0A0E17"
+  },
+  "tabBar": {
+    "color": "#A0B0C0",
+    "selectedColor": "#F5A623",
+    "backgroundColor": "#151E2C",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/orderHall/orderHall",
+        "text": "订单大厅"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

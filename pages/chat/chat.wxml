@@ -1,0 +1,57 @@
+<!-- pages/chat/chat.wxml - 订单沟通 -->
+<view class="page-container">
+  <scroll-view
+    class="message-scroll"
+    scroll-y="{{true}}"
+    scroll-into-view="{{scrollToView}}"
+    bindscrolltoupper="onLoadMoreMessages"
+    upper-threshold="100"
+  >
+    <view class="load-more" wx:if="{{hasMore && messages.length > 0}}">
+      <text class="text-xs text-muted">加载更多...</text>
+    </view>
+
+    <view class="message-list">
+      <block wx:for="{{messages}}" wx:key="_id">
+        <view class="message-row {{item.isTemp ? 'message-temp' : ''}}" id="msg-{{item._id}}">
+          <!-- 他人消息 -->
+          <view class="message-item message-left" wx:if="{{item.fromOpenid !== myOpenid}}">
+            <view class="message-bubble message-bubble-left">
+              <text class="message-content">{{item.content}}</text>
+            </view>
+          </view>
+          <!-- 自己消息 -->
+          <view class="message-item message-right" wx:else>
+            <view class="message-bubble message-bubble-right">
+              <text class="message-content">{{item.content}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+
+    <view class="empty-state" wx:if="{{messages.length === 0 && !loading}}" style="padding-top:200rpx;">
+      <text style="font-size:60rpx;">💬</text>
+      <text>暂无消息，发送第一条消息吧</text>
+    </view>
+
+    <view style="height:120rpx;"></view>
+  </scroll-view>
+
+  <!-- 输入栏 -->
+  <view class="input-bar safe-bottom">
+    <input
+      class="message-input"
+      type="text"
+      placeholder="输入消息..."
+      placeholder-class="text-muted"
+      value="{{inputValue}}"
+      bindinput="onInputChange"
+      confirm-type="send"
+      bindconfirm="onSendMessage"
+    />
+    <view class="send-btn {{inputValue ? 'active' : ''}}" bindtap="onSendMessage">
+      <text>发送</text>
+    </view>
+  </view>
+</view>

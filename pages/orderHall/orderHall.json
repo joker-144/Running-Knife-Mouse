@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "order-card": "/components/order-card/order-card",
+    "status-tag": "/components/status-tag/status-tag"
+  },
+  "navigationBarTitleText": "订单大厅",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#0A0E17"
+}

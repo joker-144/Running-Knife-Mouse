@@ -1,0 +1,153 @@
+<!-- pages/profile/profile.wxml - 个人中心 -->
+<view class="page-container">
+  <!-- 未登录状态 -->
+  <view class="login-banner" wx:if="{{!isLogin && !loading}}">
+    <view class="login-content">
+      <text style="font-size:80rpx;">🐭</text>
+      <text class="text-lg text-bold mt-16">跑刀鼠</text>
+      <text class="text-sm text-secondary mt-8">三角洲行动跑刀接单平台</text>
+      <button class="btn-primary login-btn" bindtap="onLogin">立即登录</button>
+    </view>
+  </view>
+
+  <!-- 已登录状态 -->
+  <block wx:if="{{isLogin}}">
+    <!-- 用户信息卡片 -->
+    <view class="profile-card">
+      <view class="profile-header flex-row">
+        <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+          <image class="avatar avatar-lg" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill" />
+        </button>
+        <view class="ml-16 flex-1">
+          <view class="nickname-row" bindtap="editNickname">
+            <text class="text-lg text-bold">{{userInfo.nickName || '点击设置昵称'}}</text>
+            <text class="text-xs text-secondary ml-8">✎</text>
+          </view>
+          <view class="flex-row mt-8">
+            <text class="tag {{role === 'boss' ? 'tag-pending' : 'tag-accepted'}}">{{role === 'boss' ? '👑 老板' : '⚔️ 打手'}}</text>
+            <text class="text-sm text-accent ml-8" bindtap="onSwitchRole">切换角色 ▸</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 打手认证状态 -->
+      <view class="verify-status mt-16" wx:if="{{role === 'player'}}">
+        <view class="flex-between">
+          <text class="text-sm text-secondary">认证状态</text>
+          <text class="text-sm" style="color: {{isVerified ? '#2ECC71' : '#F5A623'}};">
+            {{isVerified ? '✅ 已认证' : '⏳ 审核中'}}
+          </text>
+        </view>
+        <view class="btn-outline btn-sm mt-8" wx:if="{{!isVerified}}" bindtap="goVerify" style="display:inline-flex;padding:8rpx 24rpx;">
+          申请认证
+        </view>
+      </view>
+    </view>
+
+    <!-- 数据概览 -->
+    <view class="stats-card card">
+      <view class="stats-grid">
+        <view class="stat-item">
+          <text class="stat-value text-accent">{{stats.rating || '5.0'}}</text>
+          <text class="stat-label text-xs text-muted">好评率</text>
+        </view>
+        <view class="stat-divider"></view>
+        <view class="stat-item">
+          <text class="stat-value">{{stats.orderCount || 0}}</text>
+          <text class="stat-label text-xs text-muted">{{role === 'boss' ? '历史订单' : '接单总数'}}</text>
+        </view>
+        <view class="stat-divider"></view>
+        <view class="stat-item">
+          <text class="stat-value text-accent" wx:if="{{role === 'player'}}">¥{{stats.balance || '0.00'}}</text>
+          <text class="stat-value text-accent" wx:else>{{pendingOrders || 0}}</text>
+          <text class="stat-label text-xs text-muted">{{role === 'boss' ? '进行中' : '可提现'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 功能菜单 -->
+    <view class="menu-list">
+      <!-- 我的订单 -->
+      <view class="menu-item flex-between" bindtap="goMyOrders">
+        <view class="flex-row">
+          <text class="menu-icon">📋</text>
+          <text class="ml-16">我的订单</text>
+        </view>
+        <view class="flex-row">
+          <text class="text-xs text-accent mr-8" wx:if="{{pendingOrders > 0}}">{{pendingOrders}}笔进行中</text>
+          <text class="text-secondary">▸</text>
+        </view>
+      </view>
+
+      <!-- 打手认证 -->
+      <view class="menu-item flex-between" bindtap="goVerify" wx:if="{{role === 'player' && !isVerified}}">
+        <view class="flex-row">
+          <text class="menu-icon">🛡️</text>
+          <text class="ml-16">打手认证</text>
+        </view>
+        <view class="flex-row">
+          <text class="tag tag-pending" style="font-size:18rpx;">审核中</text>
+          <text class="text-secondary ml-8">▸</text>
+        </view>
+      </view>
+
+      <!-- 收益提现 (打手专属) -->
+      <view class="menu-item flex-between" wx:if="{{role === 'player'}}" bindtap="goWithdraw">
+        <view class="flex-row">
+          <text class="menu-icon">💰</text>
+          <text class="ml-16">收益提现</text>
+        </view>
+        <view class="flex-row">
+          <text class="text-sm text-accent mr-8">¥{{stats.balance || '0.00'}}</text>
+          <text class="text-secondary">▸</text>
+        </view>
+      </view>
+
+      <!-- 发布订单 (老板专属) -->
+      <view class="menu-item flex-between" wx:if="{{role === 'boss'}}" bindtap="goPublish">
+        <view class="flex-row">
+          <text class="menu-icon">📝</text>
+          <text class="ml-16">发布订单</text>
+        </view>
+        <text class="text-secondary">▸</text>
+      </view>
+    </view>
+
+    <!-- 累计收益 (打手) -->
+    <view class="card" wx:if="{{role === 'player'}}">
+      <text class="text-sm text-secondary">累计收益</text>
+      <text class="text-xxl text-accent text-bold mt-8">¥{{stats.totalEarned || '0.00'}}</text>
+      <text class="text-xs text-muted ml-8">（已扣除5%平台服务费）</text>
+    </view>
+  </block>
+
+  <!-- 管理后台 (管理员专属，放在退出登录上方) -->
+  <view class="menu-list" wx:if="{{role === 'admin'}}">
+    <view class="menu-item flex-between" bindtap="goAdmin">
+      <view class="flex-row">
+        <text class="menu-icon">⚙️</text>
+        <text class="ml-16">管理后台</text>
+        <text class="text-xs text-accent ml-8">审核打手认证</text>
+      </view>
+      <text class="text-secondary">▸</text>
+    </view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="menu-list" wx:if="{{isLogin}}">
+    <view class="menu-item flex-between" bindtap="onLogout">
+      <view class="flex-row">
+        <text class="menu-icon">🚪</text>
+        <text class="ml-16 text-danger">退出登录</text>
+      </view>
+      <text class="text-secondary">▸</text>
+    </view>
+  </view>
+
+  <!-- 底部版本信息 -->
+  <view class="version-info" bindtap="onVersionTap">
+    <text class="text-xs text-muted">跑刀鼠 v1.0.0</text>
+    <text class="text-xs text-muted mt-4">三角洲行动跑刀接单平台</text>
+    <text class="text-xs text-muted mt-4" wx:if="{{versionTapCount >= 3}}">再点击{{5 - versionTapCount}}次激活管理员</text>
+  </view>
+</view>

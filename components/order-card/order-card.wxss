@@ -1,0 +1,24 @@
+/* components/order-card/order-card.wxss - 订单卡片样式 */
+
+.order-card {
+  margin: 12rpx 0;
+  padding: 20rpx 24rpx;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.order-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.5);
+}
+
+.order-title {
+  line-height: 1.4;
+}
+
+.order-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

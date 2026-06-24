@@ -1,0 +1,156 @@
+<!-- pages/orderPublish/orderPublish.wxml - 发布订单 -->
+<view class="page-container safe-bottom">
+  <scroll-view class="form-scroll" scroll-y="{{true}}">
+    <!-- 服务类型 -->
+    <view class="form-section">
+      <text class="form-label text-bold">服务类型 <text class="text-danger">*</text></text>
+      <view class="service-type-grid">
+        <view
+          class="service-type-item {{form.serviceType === item.value ? 'active' : ''}}"
+          wx:for="{{serviceTypes}}"
+          wx:key="value"
+          data-type="{{item.value}}"
+          bindtap="onServiceTypeChange"
+        >
+          <text class="service-type-label">{{item.label}}</text>
+          <text class="service-type-desc text-xs text-muted">{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 地图选择 -->
+    <view class="form-section">
+      <text class="form-label text-bold">地图选择 <text class="text-danger">*</text></text>
+      <view class="form-picker" bindtap="onMapPickerShow">
+        <text class="{{form.map ? 'text-primary' : 'text-muted'}}">{{form.map || '请选择地图'}}</text>
+        <text class="text-muted">▾</text>
+      </view>
+    </view>
+
+    <!-- 地图选择器弹窗 -->
+    <view class="picker-overlay" wx:if="{{mapPickerVisible}}" bindtap="onMapPickerHide">
+      <view class="picker-panel" catchtap="noop">
+        <view class="picker-header flex-between px-24 py-16">
+          <text class="text-bold">选择地图</text>
+          <text class="text-accent" bindtap="onMapPickerHide">确定</text>
+        </view>
+        <view class="picker-body">
+          <view
+            class="picker-item {{mapIndex === index ? 'active' : ''}}"
+            wx:for="{{mapList}}"
+            wx:key="*this"
+            data-index="{{index}}"
+            bindtap="onMapSelect"
+          >
+            <text>{{item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 战备要求 -->
+    <view class="form-section">
+      <text class="form-label text-bold">战备要求</text>
+      <textarea
+        class="form-textarea"
+        placeholder="请描述战备要求、装备限制等（选填）"
+        placeholder-class="text-muted"
+        maxlength="500"
+        auto-height
+        value="{{form.requirement}}"
+        data-field="requirement"
+        bindinput="onInputChange"
+      />
+      <text class="text-xs text-muted" style="text-align:right;">{{form.requirement.length || 0}}/500</text>
+    </view>
+
+    <!-- 期望收益 -->
+    <view class="form-section">
+      <text class="form-label text-bold">期望收益</text>
+      <textarea
+        class="form-textarea"
+        placeholder="请描述期望收益要求（选填）"
+        placeholder-class="text-muted"
+        maxlength="200"
+        auto-height
+        value="{{form.expectedProfit}}"
+        data-field="expectedProfit"
+        bindinput="onInputChange"
+      />
+    </view>
+
+    <!-- 价格 -->
+    <view class="form-section">
+      <text class="form-label text-bold">价格设置 <text class="text-danger">*</text></text>
+      <view class="price-type-switch flex-row">
+        <view
+          class="price-type-item {{form.priceType === 'fixed' ? 'active' : ''}}"
+          data-type="fixed"
+          bindtap="onPriceTypeChange"
+        >一口价</view>
+        <view
+          class="price-type-item {{form.priceType === 'hour' ? 'active' : ''}}"
+          data-type="hour"
+          bindtap="onPriceTypeChange"
+        >时薪</view>
+      </view>
+      <view class="price-input-row flex-row">
+        <text class="text-lg text-accent" style="margin-right:8rpx;">¥</text>
+        <input
+          class="price-input flex-1"
+          type="digit"
+          placeholder="请输入金额"
+          placeholder-class="text-muted"
+          value="{{form.price}}"
+          data-field="price"
+          bindinput="onInputChange"
+        />
+        <text class="text-sm text-muted">{{form.priceType === 'hour' ? '元/小时' : '元'}}</text>
+      </view>
+    </view>
+
+    <!-- 联系电话 -->
+    <view class="form-section">
+      <text class="form-label text-bold">联系电话 <text class="text-danger">*</text></text>
+      <input
+        class="form-input"
+        type="number"
+        placeholder="请输入联系电话"
+        placeholder-class="text-muted"
+        maxlength="11"
+        value="{{form.contact}}"
+        data-field="contact"
+        bindinput="onInputChange"
+      />
+    </view>
+
+    <!-- 上传截图 -->
+    <view class="form-section">
+      <text class="form-label text-bold">相关截图（选填，最多6张）</text>
+      <view class="image-upload-grid">
+        <view class="image-item" wx:for="{{images}}" wx:key="*this">
+          <image class="image-thumb" src="{{item}}" mode="aspectFill" />
+          <view class="image-delete" data-index="{{index}}" bindtap="onDeleteImage">
+            <text>✕</text>
+          </view>
+        </view>
+        <view class="image-add" wx:if="{{images.length < 6}}" bindtap="onChooseImage">
+          <text style="font-size:44rpx;color:#5A6A7A;">+</text>
+          <text class="text-xs text-muted mt-8">{{uploading ? '上传中...' : '添加图片'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <view class="submit-area px-24">
+      <button class="btn-primary" bindtap="onSubmit" disabled="{{submitting}}" loading="{{submitting}}">
+        {{submitting ? '发布中...' : '立即发布'}}
+      </button>
+      <text class="text-xs text-muted text-center mt-16" style="display:block;">
+        发布即表示同意《跑刀鼠平台服务协议》
+      </text>
+    </view>
+
+    <view style="height:40rpx;"></view>
+  </scroll-view>
+</view>

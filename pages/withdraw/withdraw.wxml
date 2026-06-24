@@ -1,0 +1,96 @@
+<!-- pages/withdraw/withdraw.wxml - 收益提现 -->
+<view class="page-container safe-bottom">
+  <scroll-view scroll-y="{{true}}">
+    <!-- 余额卡片 -->
+    <view class="balance-card">
+      <text class="text-sm text-secondary">可提现余额</text>
+      <view class="flex-row mt-8">
+        <text class="text-xxl text-accent text-bold">¥{{balance}}</text>
+        <view class="btn-outline btn-sm ml-16" bindtap="onWithdrawAll" style="padding:8rpx 24rpx;font-size:22rpx;">
+          全部提现
+        </view>
+      </view>
+    </view>
+
+    <!-- 提现表单 -->
+    <view class="card">
+      <text class="text-bold mb-16">提现申请</text>
+
+      <!-- 金额 -->
+      <view class="form-section-inline">
+        <text class="text-sm text-secondary">提现金额</text>
+        <view class="amount-input-row flex-row mt-8">
+          <text class="text-lg text-accent">¥</text>
+          <input
+            class="amount-input flex-1"
+            type="digit"
+            placeholder="请输入提现金额"
+            placeholder-class="text-muted"
+            value="{{amount}}"
+            bindinput="onAmountInput"
+          />
+        </view>
+      </view>
+
+      <!-- 收款方式 -->
+      <view class="form-section-inline mt-24">
+        <text class="text-sm text-secondary">收款方式</text>
+        <view class="flex-row mt-8">
+          <view
+            class="account-type-item {{accountType === 'wechat' ? 'active' : ''}}"
+            data-type="wechat"
+            bindtap="onAccountTypeChange"
+          >微信</view>
+          <view
+            class="account-type-item {{accountType === 'alipay' ? 'active' : ''}} ml-8"
+            data-type="alipay"
+            bindtap="onAccountTypeChange"
+          >支付宝</view>
+        </view>
+      </view>
+
+      <!-- 收款账号 -->
+      <view class="form-section-inline mt-24">
+        <text class="text-sm text-secondary">收款账号</text>
+        <input
+          class="form-input mt-8"
+          placeholder="{{accountType === 'wechat' ? '请输入微信账号/手机号' : '请输入支付宝账号'}}"
+          placeholder-class="text-muted"
+          value="{{account}}"
+          bindinput="onAccountInput"
+        />
+      </view>
+
+      <!-- 手续费提示 -->
+      <view class="fee-hint mt-24">
+        <text class="text-xs text-muted">平台收取5%服务费，实际到账金额为提现金额的95%</text>
+        <text class="text-xs text-accent mt-4" wx:if="{{amount}}">
+          预计到账：¥{{arrivalAmount}}
+        </text>
+      </view>
+
+      <!-- 提交 -->
+      <button class="btn-primary mt-24" bindtap="onSubmit" disabled="{{submitting}}" loading="{{submitting}}">
+        {{submitting ? '提交中...' : '提交提现申请'}}
+      </button>
+    </view>
+
+    <!-- 提现记录 -->
+    <view class="card" wx:if="{{records.length > 0}}">
+      <text class="text-bold mb-16">提现记录</text>
+      <view class="record-item flex-between" wx:for="{{records}}" wx:key="_id">
+        <view>
+          <text class="text-sm">¥{{item.amount}}</text>
+          <text class="text-xs text-muted ml-8">{{item.account}}</text>
+        </view>
+        <view>
+          <text class="tag {{item.status === 'pending' ? 'tag-pending' : item.status === 'success' ? 'tag-completed' : 'tag-cancelled'}}" style="font-size:18rpx;">
+            {{item.status === 'pending' ? '处理中' : item.status === 'success' ? '已到账' : '已退回'}}
+          </text>
+        </view>
+      </view>
+    </view>
+
+    <view style="height:40rpx;"></view>
+  </scroll-view>
+</view>

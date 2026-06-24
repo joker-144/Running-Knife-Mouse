@@ -1,0 +1,100 @@
+<!-- pages/orderHall/orderHall.wxml - 订单大厅 -->
+<view class="page-container">
+  <!-- 顶部筛选栏 -->
+  <view class="filter-bar">
+    <!-- 服务类型筛选 -->
+    <scroll-view class="filter-types-scroll" scroll-x="{{true}}" show-scrollbar="{{false}}">
+      <view class="filter-types">
+        <view
+          class="filter-type-item {{filters.serviceType === item.value ? 'active' : ''}}"
+          wx:for="{{serviceTypes}}"
+          wx:key="value"
+          data-type="{{item.value}}"
+          bindtap="onServiceTypeFilter"
+        >
+          {{item.label}}
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 筛选按钮 -->
+    <view class="filter-more" bindtap="toggleFilterPanel">
+      <text style="font-size:28rpx;">🔍</text>
+      <text class="text-sm {{showFilterPanel ? 'text-accent' : 'text-secondary'}} ml-8">筛选</text>
+    </view>
+  </view>
+
+  <!-- 高级筛选面板 -->
+  <view class="filter-panel" wx:if="{{showFilterPanel}}">
+    <view class="filter-panel-content card">
+      <text class="text-sm text-bold mb-16">地图筛选</text>
+      <scroll-view class="map-filter-scroll" scroll-x="{{true}}" show-scrollbar="{{false}}">
+        <view class="map-filter-list">
+          <view
+            class="map-filter-item {{mapFilterIndex === -1 ? 'active' : ''}}"
+            data-index="-1"
+            bindtap="onMapSelect"
+          >全部</view>
+          <view
+            class="map-filter-item {{mapFilterIndex === index ? 'active' : ''}}"
+            wx:for="{{mapList}}"
+            wx:key="*this"
+            data-index="{{index}}"
+            bindtap="onMapSelect"
+          >{{item}}</view>
+        </view>
+      </scroll-view>
+
+      <text class="text-sm text-bold mt-24 mb-16">价格区间</text>
+      <view class="flex-row">
+        <input class="price-filter-input flex-1 mr-8" type="digit" placeholder="最低价" placeholder-class="text-muted" value="{{filters.priceMin}}" bindinput="onPriceMinInput" />
+        <text class="text-secondary mx-8">—</text>
+        <input class="price-filter-input flex-1 ml-8" type="digit" placeholder="最高价" placeholder-class="text-muted" value="{{filters.priceMax}}" bindinput="onPriceMaxInput" />
+      </view>
+
+      <view class="filter-actions flex-row mt-24">
+        <view class="btn-outline flex-1 mr-8" bindtap="resetFilters" style="padding:16rpx;">重置</view>
+        <view class="btn-primary flex-1 ml-8" bindtap="applyFilters" style="padding:16rpx;">应用筛选</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 订单列表 -->
+  <scroll-view
+    class="order-scroll"
+    scroll-y="{{true}}"
+    bindscrolltolower="onLoadMore"
+    lower-threshold="200"
+    refresher-enabled="{{true}}"
+    refresher-triggered="{{refreshing}}"
+    bindrefresherrefresh="onPullDownRefresh"
+  >
+    <view class="order-list px-24">
+      <block wx:for="{{orders}}" wx:key="_id">
+        <order-card order="{{item}}" bindtap="goOrderDetail" data-id="{{item._id}}" />
+      </block>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{orders.length === 0 && !loading}}">
+      <text style="font-size:60rpx;">📭</text>
+      <text>暂无符合条件的订单</text>
+      <text class="text-xs text-muted mt-8">点击下方按钮发布新订单</text>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+    <view class="load-more" wx:elif="{{!hasMore && orders.length > 0}}">
+      <text>— 没有更多了 —</text>
+    </view>
+
+    <view style="height:100rpx;"></view>
+  </scroll-view>
+
+  <!-- 发布按钮悬浮（仅老板可见） -->
+  <view class="publish-fab safe-bottom" bindtap="goPublish" wx:if="{{userRole === 'boss'}}">
+    <text style="font-size:40rpx;">+</text>
+  </view>
+</view>

@@ -1,0 +1,114 @@
+<!-- pages/verify/verify.wxml - 打手认证 -->
+<view class="page-container safe-bottom">
+  <scroll-view scroll-y="{{true}}" class="form-scroll">
+    <!-- 已通过认证 -->
+    <view class="verify-card verify-approved" wx:if="{{verifyStatus === 'approved'}}">
+      <text style="font-size:80rpx;">✅</text>
+      <text class="text-lg text-bold mt-16">认证已通过</text>
+      <text class="text-sm text-secondary mt-8">您已是认证打手，可以正常接单</text>
+    </view>
+
+    <!-- 审核中 -->
+    <view class="verify-card verify-pending" wx:if="{{verifyStatus === 'pending'}}">
+      <text style="font-size:80rpx;">⏳</text>
+      <text class="text-lg text-bold mt-16">审核中</text>
+      <text class="text-sm text-secondary mt-8">您的认证申请正在审核，请耐心等待</text>
+      <text class="text-xs text-muted mt-8">通常需要1-3个工作日</text>
+      <button class="btn-outline btn-sm mt-24" bindtap="onCancelVerify" style="width:200rpx;">撤销申请</button>
+    </view>
+
+    <!-- 已拒绝 -->
+    <view class="verify-card verify-rejected" wx:if="{{verifyStatus === 'rejected'}}">
+      <text style="font-size:80rpx;">❌</text>
+      <text class="text-lg text-bold mt-16">认证未通过</text>
+      <text class="text-sm text-secondary mt-8">请根据审核意见修改后重新提交</text>
+    </view>
+
+    <!-- 认证表单 (未申请或已拒绝) -->
+    <block wx:if="{{!verifyStatus || verifyStatus === 'rejected'}}">
+      <view class="card">
+        <text class="text-bold mb-16">打手认证申请</text>
+        <text class="text-sm text-secondary">请如实填写以下信息，认证通过后即可开始接单。</text>
+      </view>
+
+      <!-- 游戏ID -->
+      <view class="form-section">
+        <text class="form-label text-bold">游戏ID <text class="text-danger">*</text></text>
+        <input
+          class="form-input"
+          placeholder="请输入三角洲行动游戏ID"
+          placeholder-class="text-muted"
+          value="{{form.gameId}}"
+          data-field="gameId"
+          bindinput="onInputChange"
+        />
+      </view>
+
+      <!-- 当前段位 -->
+      <view class="form-section">
+        <text class="form-label text-bold">当前段位</text>
+        <input
+          class="form-input"
+          placeholder="如：钻石Ⅰ"
+          placeholder-class="text-muted"
+          value="{{form.rank}}"
+          data-field="rank"
+          bindinput="onInputChange"
+        />
+      </view>
+
+      <!-- 历史最高段位 -->
+      <view class="form-section">
+        <text class="form-label text-bold">历史最高段位</text>
+        <input
+          class="form-input"
+          placeholder="如：王牌"
+          placeholder-class="text-muted"
+          value="{{form.seasonRank}}"
+          data-field="seasonRank"
+          bindinput="onInputChange"
+        />
+      </view>
+
+      <!-- 个人简介 -->
+      <view class="form-section">
+        <text class="form-label text-bold">个人简介</text>
+        <textarea
+          class="form-textarea"
+          placeholder="请介绍您的游戏经验、擅长地图等..."
+          placeholder-class="text-muted"
+          maxlength="300"
+          auto-height
+          value="{{form.description}}"
+          data-field="description"
+          bindinput="onInputChange"
+        />
+      </view>
+
+      <!-- 上传截图 -->
+      <view class="form-section">
+        <text class="form-label text-bold">段位截图 <text class="text-danger">*</text></text>
+        <text class="text-xs text-muted">请上传您的段位截图、历史战绩截图（最多4张）</text>
+        <view class="image-upload-grid mt-16">
+          <view class="image-item" wx:for="{{images}}" wx:key="*this">
+            <image class="image-thumb" src="{{item}}" mode="aspectFill" />
+            <view class="image-delete" data-index="{{index}}" bindtap="onDeleteImage">✕</view>
+          </view>
+          <view class="image-add" wx:if="{{images.length < 4}}" bindtap="onChooseImage">
+            <text style="font-size:44rpx;color:#5A6A7A;">+</text>
+            <text class="text-xs text-muted mt-8">{{uploading ? '上传中...' : '添加图片'}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 提交按钮 -->
+      <view class="submit-area px-24">
+        <button class="btn-primary" bindtap="onSubmit" disabled="{{submitting}}" loading="{{submitting}}">
+          {{submitting ? '提交中...' : '提交认证申请'}}
+        </button>
+      </view>
+    </block>
+
+    <view style="height:40rpx;"></view>
+  </scroll-view>
+</view>

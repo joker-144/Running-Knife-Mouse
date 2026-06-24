@@ -1,0 +1,9 @@
+{
+  "name": "setAdmin",
+  "version": "1.0.0",
+  "description": "激活管理员身份",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

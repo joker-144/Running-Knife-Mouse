@@ -1,0 +1,31 @@
+<!-- components/order-card/order-card.wxml - 订单卡片组件 -->
+<view class="order-card card-glass">
+  <!-- 顶部 -->
+  <view class="flex-between">
+    <view class="flex-row">
+      <status-tag status="{{order.status}}" />
+      <text class="text-sm text-secondary ml-8">{{serviceTypeText}}</text>
+    </view>
+    <text class="text-sm text-muted">{{formatTime}}</text>
+  </view>
+
+  <!-- 标题/地图 -->
+  <view class="order-title mt-16">
+    <text class="text-bold">{{order.map || '未知地图'}}</text>
+  </view>
+
+  <!-- 需求描述 -->
+  <view class="order-desc mt-8" wx:if="{{order.requirement}}">
+    <text class="text-sm text-secondary">{{order.requirement}}</text>
+  </view>
+
+  <!-- 底部 -->
+  <view class="flex-between mt-16">
+    <text class="text-xl text-accent text-bold">{{priceText}}</text>
+    <view class="flex-row">
+      <text class="text-xs text-muted">
+        {{order.status === 'pending' ? '等待接单' : order.status === 'accepted' ? '已有打手' : ''}}
+      </text>
+    </view>
+  </view>
+</view>

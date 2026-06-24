@@ -1,0 +1,59 @@
+<!-- pages/admin/admin.wxml - 管理后台 -->
+<view class="page-container safe-bottom" wx:if="{{isAdmin}}">
+  <view class="header-banner card">
+    <text style="font-size:60rpx;">⚙️</text>
+    <text class="text-lg text-bold mt-8">管理后台</text>
+    <text class="text-sm text-secondary mt-8">审核打手认证申请</text>
+  </view>
+
+  <!-- 待审核列表 -->
+  <view class="card" wx:if="{{pendingUsers.length > 0}}">
+    <text class="text-bold mb-16">待审核（{{pendingUsers.length}}人）</text>
+
+    <view class="user-item" wx:for="{{pendingUsers}}" wx:key="_id">
+      <view class="flex-row">
+        <image class="avatar avatar-sm" src="{{item.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill" />
+        <view class="ml-8 flex-1">
+          <text class="text-sm text-bold">{{item.nickName}}</text>
+          <view class="flex-row mt-4">
+            <text class="text-xs text-muted">游戏ID：{{item.gameId || '未填写'}}</text>
+          </view>
+          <text class="text-xs text-muted">段位：{{item.verifyRank || '未填写'}} | 最高：{{item.verifySeasonRank || '未填写'}}</text>
+          <text class="text-xs text-secondary mt-4" wx:if="{{item.verifyDesc}}">{{item.verifyDesc}}</text>
+          <!-- 验证截图 -->
+          <view class="image-row mt-8" wx:if="{{item.verifyImages && item.verifyImages.length > 0}}">
+            <image
+              class="verify-thumb"
+              wx:for="{{item.verifyImages}}"
+              wx:for-item="img"
+              wx:key="*this"
+              src="{{img}}"
+              mode="aspectFill"
+              data-url="{{img}}"
+              data-images="{{item.verifyImages}}"
+              bindtap="onPreviewImage"
+            />
+          </view>
+        </view>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="flex-row mt-16">
+        <button class="btn-success btn-sm flex-1 mr-8" data-id="{{item._id}}" bindtap="onApprove">通过</button>
+        <button class="btn-danger btn-sm flex-1 ml-8" data-id="{{item._id}}" bindtap="onReject">拒绝</button>
+      </view>
+
+      <view class="divider" wx:if="{{index < pendingUsers.length - 1}}"></view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{pendingUsers.length === 0 && !loading}}">
+    <text style="font-size:60rpx;">✅</text>
+    <text>暂无待审核申请</text>
+  </view>
+
+  <view class="load-more" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

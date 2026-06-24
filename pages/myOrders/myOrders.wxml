@@ -1,0 +1,48 @@
+<!-- pages/myOrders/myOrders.wxml - 我的订单 -->
+<view class="page-container">
+  <!-- 标签栏 -->
+  <scroll-view class="tab-scroll" scroll-x="{{true}}" show-scrollbar="{{false}}">
+    <view class="tab-list">
+      <view
+        class="tab-item {{currentTab === item.key ? 'active' : ''}}"
+        wx:for="{{tabs}}"
+        wx:key="key"
+        data-tab="{{item.key}}"
+        bindtap="onTabChange"
+      >
+        {{item.label}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 订单列表 -->
+  <scroll-view
+    class="order-scroll"
+    scroll-y="{{true}}"
+    bindscrolltolower="onLoadMore"
+    lower-threshold="200"
+    refresher-enabled="{{true}}"
+    refresher-triggered="{{refreshing}}"
+    bindrefresherrefresh="onPullDownRefresh"
+  >
+    <view class="order-list px-24">
+      <block wx:for="{{orders}}" wx:key="_id">
+        <order-card order="{{item}}" bindtap="goOrderDetail" data-id="{{item._id}}" />
+      </block>
+    </view>
+
+    <view class="empty-state" wx:if="{{orders.length === 0 && !loading}}">
+      <text style="font-size:60rpx;">📭</text>
+      <text>暂无相关订单</text>
+    </view>
+
+    <view class="load-more" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+    <view class="load-more" wx:elif="{{!hasMore && orders.length > 0}}">
+      <text>— 没有更多了 —</text>
+    </view>
+
+    <view style="height:40rpx;"></view>
+  </scroll-view>
+</view>

@@ -1,0 +1,97 @@
+/* pages/chat/chat.wxss - 订单沟通样式 */
+
+.message-scroll {
+  height: calc(100vh - 100rpx);
+  background: var(--bg-primary);
+}
+
+.message-list {
+  padding: 16rpx 24rpx;
+}
+
+.message-row {
+  margin-bottom: 24rpx;
+}
+
+.message-temp {
+  opacity: 0.6;
+}
+
+.message-item {
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+}
+
+.message-left {
+  align-items: flex-start;
+}
+
+.message-right {
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+.message-bubble {
+  padding: 16rpx 24rpx;
+  border-radius: 20rpx;
+  word-break: break-all;
+}
+
+.message-bubble-left {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-top-left-radius: 4rpx;
+}
+
+.message-bubble-right {
+  background: linear-gradient(135deg, rgba(245,166,35,0.8), rgba(232,149,26,0.8));
+  border-top-right-radius: 4rpx;
+}
+
+.message-content {
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+/* 输入栏 */
+.input-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12rpx 16rpx;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+}
+
+.message-input {
+  flex: 1;
+  height: 72rpx;
+  padding: 0 20rpx;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  color: var(--text-primary);
+}
+
+.send-btn {
+  padding: 14rpx 28rpx;
+  margin-left: 12rpx;
+  border-radius: 36rpx;
+  background: var(--bg-primary);
+  color: var(--text-muted);
+  font-size: 26rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.send-btn.active {
+  background: linear-gradient(135deg, #F5A623, #E8951A);
+  color: #0A0E17;
+}

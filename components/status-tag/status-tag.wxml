@@ -1,0 +1,5 @@
+<!-- components/status-tag/status-tag.wxml - 状态标签组件 -->
+<view class="status-tag" style="border-color: {{color}};">
+  <view class="status-dot" wx:if="{{showDot}}" style="background: {{dotColor}};"></view>
+  <text class="status-text" style="color: {{color}};">{{text}}</text>
+</view>

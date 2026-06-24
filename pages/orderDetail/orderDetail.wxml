@@ -1,0 +1,132 @@
+<!-- pages/orderDetail/orderDetail.wxml - 订单详情 -->
+<view class="page-container safe-bottom">
+  <scroll-view scroll-y="{{true}}" wx:if="{{!loading && order}}">
+    <!-- 订单状态头部 -->
+    <view class="detail-header">
+      <view class="flex-between px-24 py-16">
+        <view class="flex-row">
+          <status-tag status="{{order.status}}" />
+          <text class="text-sm text-muted ml-8">{{order.serviceType === 'run' ? '跑刀' : order.serviceType === 'escort' ? '护航' : '代肝'}}</text>
+        </view>
+        <text class="text-lg text-accent text-bold">¥{{order.price}}<text class="text-sm">{{order.priceType === 'hour' ? '/小时' : ''}}</text></text>
+      </view>
+    </view>
+
+    <!-- 订单信息卡片 -->
+    <view class="card">
+      <view class="detail-row">
+        <text class="detail-label text-secondary">订单编号</text>
+        <text class="detail-value text-sm">{{order._id}}</text>
+      </view>
+      <view class="detail-row">
+        <text class="detail-label text-secondary">服务类型</text>
+        <text class="detail-value text-accent">{{order.serviceType === 'run' ? '跑刀' : order.serviceType === 'escort' ? '护航' : '代肝'}}</text>
+      </view>
+      <view class="detail-row">
+        <text class="detail-label text-secondary">目标地图</text>
+        <text class="detail-value">{{order.map}}</text>
+      </view>
+      <view class="detail-row">
+        <text class="detail-label text-secondary">价格类型</text>
+        <text class="detail-value">{{order.priceType === 'fixed' ? '一口价' : '时薪'}}</text>
+      </view>
+      <view class="detail-row">
+        <text class="detail-label text-secondary">价格</text>
+        <text class="detail-value text-accent text-bold">¥{{order.price}}{{order.priceType === 'hour' ? '/小时' : ''}}</text>
+      </view>
+      <view class="detail-row">
+        <text class="detail-label text-secondary">联系电话</text>
+        <text class="detail-value text-accent" bindtap="onContact">{{order.contact || '未填写'}}</text>
+      </view>
+      <view class="detail-row" wx:if="{{order.expectedProfit}}">
+        <text class="detail-label text-secondary">期望收益</text>
+        <text class="detail-value">{{order.expectedProfit}}</text>
+      </view>
+    </view>
+
+    <!-- 战备要求 -->
+    <view class="card" wx:if="{{order.requirement}}">
+      <text class="text-sm text-bold mb-8">战备要求</text>
+      <text class="text-sm text-secondary">{{order.requirement}}</text>
+    </view>
+
+    <!-- 相关截图 -->
+    <view class="card" wx:if="{{order.images && order.images.length > 0}}">
+      <text class="text-sm text-bold mb-16">相关截图</text>
+      <view class="image-list">
+        <image
+          class="detail-image"
+          wx:for="{{order.images}}"
+          wx:key="*this"
+          src="{{item}}"
+          mode="aspectFill"
+          data-url="{{item}}"
+          bindtap="onPreviewImage"
+        />
+      </view>
+    </view>
+
+    <!-- 时间线 -->
+    <view class="card">
+      <text class="text-sm text-bold mb-16">订单时间线</text>
+      <view class="timeline">
+        <view class="timeline-item">
+          <view class="timeline-dot"></view>
+          <view class="flex-col ml-16">
+            <text class="text-sm">订单发布</text>
+            <text class="text-xs text-muted">{{order.createTime}}</text>
+          </view>
+        </view>
+        <view class="timeline-item" wx:if="{{order.acceptedAt}}">
+          <view class="timeline-dot" style="background:#3498DB;"></view>
+          <view class="flex-col ml-16">
+            <text class="text-sm">已接单</text>
+            <text class="text-xs text-muted">{{order.acceptedAt}}</text>
+          </view>
+        </view>
+        <view class="timeline-item" wx:if="{{order.startedAt}}">
+          <view class="timeline-dot" style="background:#2ECC71;"></view>
+          <view class="flex-col ml-16">
+            <text class="text-sm">服务开始</text>
+            <text class="text-xs text-muted">{{order.startedAt}}</text>
+          </view>
+        </view>
+        <view class="timeline-item" wx:if="{{order.completedAt}}">
+          <view class="timeline-dot" style="background:#A0B0C0;"></view>
+          <view class="flex-col ml-16">
+            <text class="text-sm">已完成</text>
+            <text class="text-xs text-muted">{{order.completedAt}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view style="height:160rpx;"></view>
+  </scroll-view>
+
+  <!-- 加载中 -->
+  <view class="flex-center" wx:if="{{loading}}" style="padding-top:200rpx;">
+    <text class="text-muted">加载中...</text>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar safe-bottom" wx:if="{{!loading && order}}">
+    <!-- 老板视角 - 可取消 -->
+    <block wx:if="{{isOwner}}">
+      <button class="btn-danger btn-sm flex-1 mr-8" wx:if="{{canCancel}}" bindtap="onCancelOrder">取消订单</button>
+      <button class="btn-success btn-sm flex-1 mr-8" wx:if="{{canConfirm}}" bindtap="onConfirmOrder">确认完成</button>
+    </block>
+
+    <!-- 打手视角 -->
+    <block wx:if="{{userRole === 'player'}}">
+      <button class="btn-primary btn-sm flex-1 mr-8" wx:if="{{canAccept}}" bindtap="onAcceptOrder">接取订单</button>
+      <button class="btn-success btn-sm flex-1 mr-8" wx:if="{{canStart}}" bindtap="onStartService">开始服务</button>
+      <button class="btn-primary btn-sm flex-1 mr-8" wx:if="{{canComplete}}" bindtap="onCompleteOrder">申请完成</button>
+    </block>
+
+    <!-- 聊天按钮 -->
+    <view class="chat-btn btn-outline btn-sm flex-1" bindtap="goChat" wx:if="{{!isOwner || (isOwner && (canCancel || canConfirm))}}">
+      💬
+    </view>
+  </view>
+</view>

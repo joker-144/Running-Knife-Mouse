@@ -1,0 +1,74 @@
+/* pages/withdraw/withdraw.wxss - 收益提现样式 */
+
+.balance-card {
+  margin: 24rpx;
+  padding: 40rpx 32rpx;
+  background: linear-gradient(135deg, rgba(245,166,35,0.15), rgba(245,166,35,0.05));
+  border: 1px solid rgba(245,166,35,0.2);
+  border-radius: var(--border-radius);
+}
+
+.form-section-inline {
+  padding-bottom: 16rpx;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.form-section-inline:last-child {
+  border-bottom: none;
+}
+
+.amount-input-row {
+  padding: 16rpx;
+  background: var(--bg-primary);
+  border: 2rpx solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+}
+
+.amount-input {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.form-input {
+  width: 100%;
+  padding: 20rpx 16rpx;
+  background: var(--bg-primary);
+  border: 2rpx solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  font-size: 28rpx;
+  color: var(--text-primary);
+  box-sizing: border-box;
+}
+
+/* 收款方式 */
+.account-type-item {
+  padding: 16rpx 32rpx;
+  background: var(--bg-primary);
+  border: 2rpx solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+.account-type-item.active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.fee-hint {
+  padding: 16rpx;
+  background: var(--bg-primary);
+  border-radius: var(--border-radius-sm);
+}
+
+/* 记录 */
+.record-item {
+  padding: 20rpx 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.record-item:last-child {
+  border-bottom: none;
+}

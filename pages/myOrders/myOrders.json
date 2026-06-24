@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "order-card": "/components/order-card/order-card"
+  },
+  "navigationBarTitleText": "我的订单",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#0A0E17"
+}

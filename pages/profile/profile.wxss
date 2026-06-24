@@ -1,0 +1,122 @@
+/* pages/profile/profile.wxss - 个人中心样式 */
+
+/* 未登录 */
+.login-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 24rpx;
+  min-height: 60vh;
+}
+
+.login-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-btn {
+  margin-top: 40rpx;
+  width: 400rpx;
+}
+
+/* 用户信息卡片 */
+.profile-card {
+  background: linear-gradient(135deg, #1A2435, #151E2C);
+  margin: 24rpx;
+  padding: 32rpx 24rpx;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+}
+
+.profile-header {
+  align-items: center;
+}
+
+.avatar-btn {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  line-height: 1;
+}
+
+.avatar-btn::after {
+  border: none;
+}
+
+.nickname-row {
+  display: flex;
+  align-items: center;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.verify-status {
+  padding: 16rpx;
+  background: var(--bg-primary);
+  border-radius: var(--border-radius-sm);
+}
+
+/* 数据概览 */
+.stats-card {
+  margin: 16rpx 24rpx;
+}
+
+.stats-grid {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.stat-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.stat-label {
+  margin-top: 4rpx;
+}
+
+.stat-divider {
+  width: 2rpx;
+  height: 48rpx;
+  background: var(--border-color);
+}
+
+/* 功能菜单 */
+.menu-list {
+  margin: 16rpx 24rpx;
+  background: var(--bg-card);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.menu-item {
+  padding: 28rpx 24rpx;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-icon {
+  font-size: 36rpx;
+}
+
+/* 版本信息 */
+.version-info {
+  text-align: center;
+  padding: 40rpx 0;
+  margin-bottom: 40rpx;
+}

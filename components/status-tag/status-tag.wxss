@@ -1,0 +1,23 @@
+/* components/status-tag/status-tag.wxss - 状态标签样式 */
+
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4rpx 14rpx;
+  border-radius: 20rpx;
+  border: 1px solid;
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.status-dot {
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  margin-right: 6rpx;
+  flex-shrink: 0;
+}
+
+.status-text {
+  white-space: nowrap;
+}
