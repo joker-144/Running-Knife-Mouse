@@ -13,6 +13,28 @@
   z-index: 100;
 }
 
+/* ====== 未登录状态 ====== */
+.login-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 24rpx;
+  min-height: 60vh;
+}
+
+.login-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.login-btn {
+  margin-top: 40rpx;
+  width: 400rpx;
+}
+
 .filter-types-scroll {
   flex: 1;
   white-space: nowrap;
@@ -138,4 +160,48 @@
   font-weight: bold;
   box-shadow: 0 8rpx 24rpx rgba(245, 166, 35, 0.4);
   z-index: 100;
+}
+
+/* ====== 未登录状态 ====== */
+.login-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 24rpx;
+  min-height: 60vh;
+}
+
+.login-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.login-btn {
+  margin-top: 40rpx;
+  width: 400rpx;
+}
+
+/* ====== 未登录状态 ====== */
+.login-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 24rpx;
+  min-height: 60vh;
+}
+
+.login-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.login-btn {
+  margin-top: 40rpx;
+  width: 400rpx;
 }

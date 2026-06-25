@@ -9,7 +9,8 @@
     "pages/myOrders/myOrders",
     "pages/chat/chat",
     "pages/withdraw/withdraw",
-    "pages/admin/admin"
+    "pages/admin/admin",
+    "pages/reviews/reviews"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -26,15 +27,21 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "images/tab-home.png",
+        "selectedIconPath": "images/tab-home-active.png"
       },
       {
         "pagePath": "pages/orderHall/orderHall",
-        "text": "订单大厅"
+        "text": "订单大厅",
+        "iconPath": "images/tab-order.png",
+        "selectedIconPath": "images/tab-order-active.png"
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "images/tab-profile.png",
+        "selectedIconPath": "images/tab-profile-active.png"
       }
     ]
   },

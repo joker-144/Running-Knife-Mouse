@@ -23,15 +23,11 @@ exports.main = async (event, context) => {
     // 确定接收方
     let toOpenid = ''
     if (order._openid === openid) {
-      toOpenid = order.playerOpenid
+      toOpenid = order.playerOpenid || ''  // 可能暂无打手
     } else if (order.playerOpenid === openid) {
       toOpenid = order._openid
     } else {
       return { success: false, message: '无权在此订单发送消息' }
-    }
-
-    if (!toOpenid) {
-      return { success: false, message: '对方尚未接单' }
     }
 
     const msgData = {

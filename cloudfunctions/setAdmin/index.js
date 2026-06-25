@@ -2,7 +2,9 @@
 const cloud = require('wx-server-sdk')
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
 const db = cloud.database()
-const env = require('../../config/env.js')
+
+// ⚠️ 请修改此密码为强密码，并重新部署云函数
+const ADMIN_PASSWORD = 'your_admin_password_here'
 
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
@@ -10,7 +12,7 @@ exports.main = async (event, context) => {
   const { password } = event
 
   // 校验密码
-  if (password !== env.ADMIN.PASSWORD) {
+  if (password !== ADMIN_PASSWORD) {
     return { success: false, message: '密码错误' }
   }
 

@@ -165,4 +165,21 @@
   <view class="load-more" wx:if="{{loading}}">
     <text>加载中...</text>
   </view>
+
+  <!-- ====== 昵称设置弹窗 ====== -->
+  <view class="modal-overlay" wx:if="{{showNicknameModal}}" catchtap="hideNicknameModal">
+    <view class="modal-box" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">设置昵称</text>
+        <text class="modal-subtitle">让别人更容易记住您</text>
+      </view>
+      <view class="modal-body">
+        <input class="modal-input" value="{{nicknameInput}}" placeholder="请输入昵称" bindinput="onNicknameInput" focus="{{true}}" maxlength="20" />
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn modal-btn-cancel" bindtap="hideNicknameModal">跳过</button>
+        <button class="modal-btn modal-btn-confirm" bindtap="confirmNickname">确定</button>
+      </view>
+    </view>
+  </view>
 </view>

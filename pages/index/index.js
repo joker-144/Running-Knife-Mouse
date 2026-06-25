@@ -18,7 +18,9 @@ Page({
     userAvatar: '',
     userNickName: '跑刀鼠用户',
     isLogin: false,
-    loading: true
+    loading: true,
+    showNicknameModal: false,
+    nicknameInput: ''
   },
 
   onLoad() {
@@ -57,36 +59,6 @@ Page({
     }
   },
 
-  // 首次登录引导设置昵称
-  promptSetNickname() {
-    const that = this
-    wx.showModal({
-      title: '设置您的昵称',
-      content: '让别人更容易记住您',
-      editable: true,
-      placeholderText: '请输入昵称',
-      success: async (res) => {
-        if (!res.confirm || !res.content) return
-        const nickName = res.content.trim()
-        const userInfo = app.globalData.userInfo
-        if (userInfo && userInfo._id) {
-          const db = wx.cloud.database()
-          try {
-            await db.collection('users').doc(userInfo._id).update({
-              data: { nickName }
-            })
-            userInfo.nickName = nickName
-            app.globalData.userInfo = userInfo
-            wx.setStorageSync('userInfo', userInfo)
-            that.setData({ userNickName: nickName })
-          } catch (err) {
-            // ignore
-          }
-        }
-      }
-    })
-  },
-
   // 手动登录按钮
   startLogin() {
     this.setData({ loading: true })
@@ -121,36 +93,6 @@ Page({
     }
   },
 
-  // 首次登录引导设置昵称
-  promptSetNickname() {
-    const that = this
-    wx.showModal({
-      title: '设置您的昵称',
-      content: '让别人更容易记住您',
-      editable: true,
-      placeholderText: '请输入昵称',
-      success: async (res) => {
-        if (!res.confirm || !res.content) return
-        const nickName = res.content.trim()
-        const userInfo = app.globalData.userInfo
-        if (userInfo && userInfo._id) {
-          const db = wx.cloud.database()
-          try {
-            await db.collection('users').doc(userInfo._id).update({
-              data: { nickName }
-            })
-            userInfo.nickName = nickName
-            app.globalData.userInfo = userInfo
-            wx.setStorageSync('userInfo', userInfo)
-            that.setData({ userNickName: nickName })
-          } catch (err) {
-            // ignore
-          }
-        }
-      }
-    })
-  },
-
   async loadData() {
     this.setData({ loading: true })
     try {
@@ -181,36 +123,6 @@ Page({
     }
   },
 
-  // 首次登录引导设置昵称
-  promptSetNickname() {
-    const that = this
-    wx.showModal({
-      title: '设置您的昵称',
-      content: '让别人更容易记住您',
-      editable: true,
-      placeholderText: '请输入昵称',
-      success: async (res) => {
-        if (!res.confirm || !res.content) return
-        const nickName = res.content.trim()
-        const userInfo = app.globalData.userInfo
-        if (userInfo && userInfo._id) {
-          const db = wx.cloud.database()
-          try {
-            await db.collection('users').doc(userInfo._id).update({
-              data: { nickName }
-            })
-            userInfo.nickName = nickName
-            app.globalData.userInfo = userInfo
-            wx.setStorageSync('userInfo', userInfo)
-            that.setData({ userNickName: nickName })
-          } catch (err) {
-            // ignore
-          }
-        }
-      }
-    })
-  },
-
   async loadRecentOrders() {
     const db = wx.cloud.database()
     try {
@@ -225,36 +137,6 @@ Page({
     } catch (err) {
       console.error('加载订单列表失败:', err)
     }
-  },
-
-  // 首次登录引导设置昵称
-  promptSetNickname() {
-    const that = this
-    wx.showModal({
-      title: '设置您的昵称',
-      content: '让别人更容易记住您',
-      editable: true,
-      placeholderText: '请输入昵称',
-      success: async (res) => {
-        if (!res.confirm || !res.content) return
-        const nickName = res.content.trim()
-        const userInfo = app.globalData.userInfo
-        if (userInfo && userInfo._id) {
-          const db = wx.cloud.database()
-          try {
-            await db.collection('users').doc(userInfo._id).update({
-              data: { nickName }
-            })
-            userInfo.nickName = nickName
-            app.globalData.userInfo = userInfo
-            wx.setStorageSync('userInfo', userInfo)
-            that.setData({ userNickName: nickName })
-          } catch (err) {
-            // ignore
-          }
-        }
-      }
-    })
   },
 
   showRolePicker() {
@@ -297,35 +179,48 @@ Page({
     }
   },
 
+  // ====== 昵称设置弹窗 ======
   // 首次登录引导设置昵称
   promptSetNickname() {
-    const that = this
-    wx.showModal({
-      title: '设置您的昵称',
-      content: '让别人更容易记住您',
-      editable: true,
-      placeholderText: '请输入昵称',
-      success: async (res) => {
-        if (!res.confirm || !res.content) return
-        const nickName = res.content.trim()
-        const userInfo = app.globalData.userInfo
-        if (userInfo && userInfo._id) {
-          const db = wx.cloud.database()
-          try {
-            await db.collection('users').doc(userInfo._id).update({
-              data: { nickName }
-            })
-            userInfo.nickName = nickName
-            app.globalData.userInfo = userInfo
-            wx.setStorageSync('userInfo', userInfo)
-            that.setData({ userNickName: nickName })
-          } catch (err) {
-            // ignore
-          }
-        }
-      }
+    this.setData({
+      showNicknameModal: true,
+      nicknameInput: ''
     })
   },
+
+  hideNicknameModal() {
+    this.setData({ showNicknameModal: false, nicknameInput: '' })
+  },
+
+  onNicknameInput(e) {
+    this.setData({ nicknameInput: e.detail.value })
+  },
+
+  async confirmNickname() {
+    const nickName = this.data.nicknameInput.trim()
+    if (!nickName) {
+      wx.showToast({ title: '昵称不能为空', icon: 'none' })
+      return
+    }
+    const userInfo = app.globalData.userInfo
+    if (userInfo && userInfo._id) {
+      const db = wx.cloud.database()
+      try {
+        await db.collection('users').doc(userInfo._id).update({
+          data: { nickName }
+        })
+        userInfo.nickName = nickName
+        app.globalData.userInfo = userInfo
+        wx.setStorageSync('userInfo', userInfo)
+        this.setData({ userNickName: nickName, showNicknameModal: false, nicknameInput: '' })
+        wx.showToast({ title: '昵称已设置', icon: 'success' })
+      } catch (err) {
+        wx.showToast({ title: '设置失败', icon: 'none' })
+      }
+    }
+  },
+
+  stopPropagation() {},
 
   // 切换到打手
   switchToPlayer() {

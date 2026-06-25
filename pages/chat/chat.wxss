@@ -55,6 +55,12 @@
   color: var(--text-primary);
 }
 
+/* 发送者标签 */
+.message-sender {
+  display: block;
+  padding: 0 8rpx;
+}
+
 /* 输入栏 */
 .input-bar {
   position: fixed;

@@ -1,5 +1,18 @@
 <!-- pages/orderHall/orderHall.wxml - 订单大厅 -->
 <view class="page-container">
+  <!-- ====== 未登录状态 ====== -->
+  <view class="login-banner" wx:if="{{!isLogin}}">
+    <view class="login-content">
+      <text style="font-size:100rpx;">📋</text>
+      <text class="text-xl text-bold mt-16">订单大厅</text>
+      <text class="text-sm text-secondary mt-8">查看所有跑刀订单</text>
+      <text class="text-sm text-secondary mt-4">登录后即可筛选和接单</text>
+      <button class="btn-primary login-btn" bindtap="startLogin">去登录</button>
+    </view>
+  </view>
+
+  <!-- ====== 已登录状态 ====== -->
+  <block wx:else>
   <!-- 顶部筛选栏 -->
   <view class="filter-bar">
     <!-- 服务类型筛选 -->
@@ -97,4 +110,5 @@
   <view class="publish-fab safe-bottom" bindtap="goPublish" wx:if="{{userRole === 'boss'}}">
     <text style="font-size:40rpx;">+</text>
   </view>
+  </block>
 </view>

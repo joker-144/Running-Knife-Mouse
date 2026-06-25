@@ -2,7 +2,8 @@
 const cloud = require('wx-server-sdk')
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
 const db = cloud.database()
-const env = require('../../config/env.js')
+
+const PLATFORM_FEE_RATE = 0.05  // 平台抽成 5%
 
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
@@ -57,7 +58,7 @@ exports.main = async (event, context) => {
 
     if (finalOrder.bossConfirm && finalOrder.playerConfirm) {
       // 双方确认，结算
-      const platformFee = Math.round(order.price * env.PLATFORM_FEE_RATE * 100) / 100
+      const platformFee = Math.round(order.price * PLATFORM_FEE_RATE * 100) / 100
       const earning = order.price - platformFee
 
       await db.collection('orders').doc(orderId).update({

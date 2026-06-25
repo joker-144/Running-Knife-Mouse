@@ -1,7 +1,7 @@
 // config/env.js - 环境配置文件
 module.exports = {
   // 云开发环境 ID，请在微信开发者工具中替换为你的环境ID
-  CLOUD_ENV_ID: 'XXXXXXXXXXX',
+  CLOUD_ENV_ID: 'cloudbase-d6gcx23kbd0cb49eb',
 
   // 平台抽成比例（5%）
   PLATFORM_FEE_RATE: 0.05,
@@ -69,6 +69,6 @@ module.exports = {
   // 管理员页面配置
   ADMIN: {
     PENDING_LIMIT: 50,        // 待审核用户查询条数
-    PASSWORD: 'your_admin_password_here'  // 管理员激活密码（请修改为强密码）
+    PASSWORD: 'admin'  // 管理员激活密码（请修改为强密码）
   }
 }

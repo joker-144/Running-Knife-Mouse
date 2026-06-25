@@ -3,12 +3,13 @@ const cloud = require('wx-server-sdk')
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
 const db = cloud.database()
 const _ = db.command
-const env = require('../../config/env.js')
+
+const PAGE_SIZE = 10
 
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   const openid = wxContext.OPENID
-  const { page = 1, pageSize = env.PAGE_SIZE, filters = {} } = event
+  const { page = 1, pageSize = PAGE_SIZE, filters = {} } = event
 
   try {
     let query = {}

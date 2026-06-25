@@ -47,17 +47,21 @@
     <!-- 数据概览 -->
     <view class="stats-card card">
       <view class="stats-grid">
-        <view class="stat-item">
-          <text class="stat-value text-accent">{{stats.rating || '5.0'}}</text>
-          <text class="stat-label text-xs text-muted">好评率</text>
+        <view class="stat-item stat-clickable" bindtap="onTapRating">
+          <text class="stat-value text-accent">{{stats.goodCount || 0}}</text>
+          <text class="stat-label text-xs text-muted">👍 好评</text>
         </view>
-        <view class="stat-divider"></view>
-        <view class="stat-item">
+        <view class="stat-item stat-clickable" bindtap="onTapBadRating">
+          <text class="stat-value" style="color:#E74C3C;">{{stats.badCount || 0}}</text>
+          <text class="stat-label text-xs text-muted">👎 差评</text>
+        </view>
+      </view>
+      <view class="stats-grid stats-grid-bottom">
+        <view class="stat-item stat-clickable" bindtap="onTapOrders">
           <text class="stat-value">{{stats.orderCount || 0}}</text>
           <text class="stat-label text-xs text-muted">{{role === 'boss' ? '历史订单' : '接单总数'}}</text>
         </view>
-        <view class="stat-divider"></view>
-        <view class="stat-item">
+        <view class="stat-item stat-clickable" bindtap="onTapBalance">
           <text class="stat-value text-accent" wx:if="{{role === 'player'}}">¥{{stats.balance || '0.00'}}</text>
           <text class="stat-value text-accent" wx:else>{{pendingOrders || 0}}</text>
           <text class="stat-label text-xs text-muted">{{role === 'boss' ? '进行中' : '可提现'}}</text>
@@ -149,5 +153,37 @@
     <text class="text-xs text-muted">跑刀鼠 v1.0.0</text>
     <text class="text-xs text-muted mt-4">三角洲行动跑刀接单平台</text>
     <text class="text-xs text-muted mt-4" wx:if="{{versionTapCount >= 3}}">再点击{{5 - versionTapCount}}次激活管理员</text>
+  </view>
+
+  <!-- ====== 昵称编辑弹窗 ====== -->
+  <view class="modal-overlay" wx:if="{{showNicknameModal}}" catchtap="hideNicknameModal">
+    <view class="modal-box" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">设置昵称</text>
+      </view>
+      <view class="modal-body">
+        <input class="modal-input" value="{{nicknameInput}}" placeholder="请输入昵称" bindinput="onNicknameInput" focus="{{true}}" maxlength="20" />
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn modal-btn-cancel" bindtap="hideNicknameModal">取消</button>
+        <button class="modal-btn modal-btn-confirm" bindtap="confirmNickname">确定</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- ====== 管理员激活弹窗 ====== -->
+  <view class="modal-overlay" wx:if="{{showAdminModal}}" catchtap="hideAdminModal">
+    <view class="modal-box" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">激活管理员</text>
+      </view>
+      <view class="modal-body">
+        <input class="modal-input" value="{{adminPasswordInput}}" placeholder="请输入管理员密码" password="{{true}}" bindinput="onAdminPasswordInput" focus="{{true}}" />
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn modal-btn-cancel" bindtap="hideAdminModal">取消</button>
+        <button class="modal-btn modal-btn-confirm" bindtap="confirmAdminActivate">确定</button>
+      </view>
+    </view>
   </view>
 </view>

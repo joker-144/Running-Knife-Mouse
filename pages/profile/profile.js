@@ -13,11 +13,18 @@ Page({
       orderCount: 0,
       totalEarned: 0,
       balance: 0,
-      rating: 5.0
+      rating: 5.0,
+      goodCount: 0,
+      badCount: 0
     },
     pendingOrders: 0,
     loading: true,
-    versionTapCount: 0
+    versionTapCount: 0,
+    // 弹窗相关
+    showNicknameModal: false,
+    nicknameInput: '',
+    showAdminModal: false,
+    adminPasswordInput: ''
   },
 
   onShow() {
@@ -26,12 +33,13 @@ Page({
 
   loadUserData() {
     const userInfo = app.globalData.userInfo
+    const openid = app.globalData.openid
 
-    if (userInfo && userInfo._id) {
+    if (userInfo && userInfo._id && openid) {
       this.setData({
         userInfo,
         isLogin: true,
-        openid: app.globalData.openid,
+        openid: openid,
         role: userInfo.role || 'boss',
         isVerified: userInfo.isVerified || false,
         verifyStatus: userInfo.verifyStatus || 'pending',
@@ -39,11 +47,14 @@ Page({
           orderCount: userInfo.orderCount || 0,
           totalEarned: userInfo.totalEarned || 0,
           balance: userInfo.balance || 0,
-          rating: userInfo.rating || 5.0
+          rating: userInfo.rating || 5.0,
+          goodCount: this.data.stats.goodCount || 0,
+          badCount: this.data.stats.badCount || 0
         },
         loading: false
       })
       this.loadPendingCount()
+      this.loadReviewStats()
     } else {
       this.setData({ loading: false })
     }
@@ -72,6 +83,26 @@ Page({
       this.setData({ pendingOrders: res.total || 0 })
     } catch (err) {
       console.error('加载订单数失败:', err)
+    }
+  },
+
+  async loadReviewStats() {
+    const openid = app.globalData.openid
+    if (!openid) return
+    try {
+      const db = wx.cloud.database()
+      const res = await db.collection('reviews')
+        .where({ toOpenid: openid })
+        .get()
+      const all = res.data || []
+      const goodCount = all.filter(r => r.rating >= 4).length
+      const badCount = all.filter(r => r.rating <= 2).length
+      this.setData({
+        'stats.goodCount': goodCount,
+        'stats.badCount': badCount
+      })
+    } catch (err) {
+      console.error('加载评价统计失败:', err)
     }
   },
 
@@ -134,35 +165,47 @@ Page({
     }
   },
 
-  // 编辑昵称（弹窗方式，避免自动弹键盘）
+  // 编辑昵称（弹窗方式）
   editNickname() {
-    const that = this
-    wx.showModal({
-      title: '设置昵称',
-      editable: true,
-      placeholderText: '请输入昵称',
-      content: '',
-      success: async (res) => {
-        if (!res.confirm || !res.content) return
-        const nickName = res.content.trim()
-        const userInfo = that.data.userInfo
-        if (userInfo && userInfo._id) {
-          const db = wx.cloud.database()
-          try {
-            await db.collection('users').doc(userInfo._id).update({
-              data: { nickName }
-            })
-            userInfo.nickName = nickName
-            app.globalData.userInfo = userInfo
-            wx.setStorageSync('userInfo', userInfo)
-            that.setData({ userInfo })
-            wx.showToast({ title: '昵称已更新', icon: 'success' })
-          } catch (err) {
-            wx.showToast({ title: '更新失败', icon: 'none' })
-          }
-        }
-      }
+    this.setData({
+      showNicknameModal: true,
+      nicknameInput: this.data.userInfo?.nickName || ''
     })
+  },
+
+  // 关闭昵称弹窗
+  hideNicknameModal() {
+    this.setData({ showNicknameModal: false, nicknameInput: '' })
+  },
+
+  // 昵称输入
+  onNicknameInput(e) {
+    this.setData({ nicknameInput: e.detail.value })
+  },
+
+  // 确认修改昵称
+  async confirmNickname() {
+    const nickName = this.data.nicknameInput.trim()
+    if (!nickName) {
+      wx.showToast({ title: '昵称不能为空', icon: 'none' })
+      return
+    }
+    const userInfo = this.data.userInfo
+    if (userInfo && userInfo._id) {
+      const db = wx.cloud.database()
+      try {
+        await db.collection('users').doc(userInfo._id).update({
+          data: { nickName }
+        })
+        userInfo.nickName = nickName
+        app.globalData.userInfo = userInfo
+        wx.setStorageSync('userInfo', userInfo)
+        this.setData({ userInfo, showNicknameModal: false, nicknameInput: '' })
+        wx.showToast({ title: '昵称已更新', icon: 'success' })
+      } catch (err) {
+        wx.showToast({ title: '更新失败', icon: 'none' })
+      }
+    }
   },
 
   // 切换角色
@@ -182,6 +225,29 @@ Page({
         }
       }
     })
+  },
+
+  // 点击好评/差评 → 跳转评价页面
+  onTapRating() {
+    wx.navigateTo({ url: '/pages/reviews/reviews?tab=good' })
+  },
+
+  onTapBadRating() {
+    wx.navigateTo({ url: '/pages/reviews/reviews?tab=bad' })
+  },
+
+  // 点击订单数 → 跳转我的订单
+  onTapOrders() {
+    wx.navigateTo({ url: '/pages/myOrders/myOrders' })
+  },
+
+  // 点击余额/进行中
+  onTapBalance() {
+    if (this.data.role === 'player') {
+      wx.navigateTo({ url: '/pages/withdraw/withdraw' })
+    } else {
+      wx.navigateTo({ url: '/pages/myOrders/myOrders' })
+    }
   },
 
   // 导航
@@ -226,32 +292,56 @@ Page({
   },
 
   showAdminActivate() {
-    const that = this
-    wx.showModal({
-      title: '激活管理员',
-      content: '请输入管理员激活密码',
-      editable: true,
-      placeholderText: '请输入密码',
-      success: async (res) => {
-        if (!res.confirm || !res.content) return
-        wx.showLoading({ title: '验证中...' })
-        try {
-          const result = await wx.cloud.callFunction({
-            name: 'setAdmin',
-            data: { password: res.content }
-          })
-          wx.hideLoading()
-          if (result.result && result.result.success) {
-            wx.showToast({ title: '管理员已激活', icon: 'success' })
-            that.loadUserData()
-          } else {
-            wx.showToast({ title: result.result?.message || '验证失败', icon: 'none' })
-          }
-        } catch (err) {
-          wx.hideLoading()
-          wx.showToast({ title: '网络错误', icon: 'none' })
-        }
-      }
+    this.setData({
+      showAdminModal: true,
+      adminPasswordInput: ''
     })
-  }
+  },
+
+  // 关闭管理员弹窗
+  hideAdminModal() {
+    this.setData({ showAdminModal: false, adminPasswordInput: '' })
+  },
+
+  // 管理员密码输入
+  onAdminPasswordInput(e) {
+    this.setData({ adminPasswordInput: e.detail.value })
+  },
+
+  // 确认激活管理员
+  async confirmAdminActivate() {
+    const password = this.data.adminPasswordInput.trim()
+    if (!password) {
+      wx.showToast({ title: '请输入密码', icon: 'none' })
+      return
+    }
+    wx.showLoading({ title: '验证中...' })
+    try {
+      const result = await wx.cloud.callFunction({
+        name: 'setAdmin',
+        data: { password }
+      })
+      wx.hideLoading()
+      if (result.result && result.result.success) {
+        // 更新全局用户信息，确保 loadUserData 读到 admin 角色
+        if (app.globalData.userInfo) {
+          app.globalData.userInfo.role = 'admin'
+          app.globalData.userInfo.isVerified = true
+          app.globalData.userInfo.verifyStatus = 'approved'
+          wx.setStorageSync('userInfo', app.globalData.userInfo)
+        }
+        this.setData({ showAdminModal: false, adminPasswordInput: '' })
+        wx.showToast({ title: '管理员已激活', icon: 'success' })
+        this.loadUserData()
+      } else {
+        wx.showToast({ title: result.result?.message || '验证失败', icon: 'none' })
+      }
+    } catch (err) {
+      wx.hideLoading()
+      wx.showToast({ title: '网络错误', icon: 'none' })
+    }
+  },
+
+  // 阻止弹窗冒泡
+  stopPropagation() {}
 })

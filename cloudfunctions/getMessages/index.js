@@ -2,12 +2,14 @@
 const cloud = require('wx-server-sdk')
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
 const db = cloud.database()
-const env = require('../../config/env.js')
+
+const PAGE_SIZE = 20    // 默认每页条数
+const POLL_SIZE = 30    // 轮询最近条数
 
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   const openid = wxContext.OPENID
-  const { orderId, page = 1, pageSize = env.CHAT.PAGE_SIZE } = event
+  const { orderId, page = 1, pageSize = PAGE_SIZE } = event
 
   if (!orderId) {
     return { success: false, message: '缺少订单ID' }
@@ -28,7 +30,6 @@ exports.main = async (event, context) => {
       .map(msg => msg._id)
 
     if (unreadIds.length > 0) {
-      const _ = db.command
       for (const id of unreadIds) {
         await db.collection('messages').doc(id).update({
           data: { isRead: true }
@@ -36,6 +37,7 @@ exports.main = async (event, context) => {
       }
     }
 
+    // 转为正序（最旧→最新），客户端直接追加使用
     return {
       success: true,
       data: result.data.reverse()

@@ -11,7 +11,17 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "useCompilerPlugins": false
+    "useCompilerPlugins": false,
+    "compileWorklet": false,
+    "uploadWithSourceMap": true,
+    "packNpmManually": false,
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true
   },
   "compileType": "miniprogram",
   "cloudfunctionRoot": "cloudfunctions/",
@@ -20,6 +30,6 @@
     "ignore": [],
     "include": []
   },
-  "appid": "XXXXXXXXXXXX",
+  "appid": "wx60d4a751764fef0b",
   "editorSetting": {}
 }

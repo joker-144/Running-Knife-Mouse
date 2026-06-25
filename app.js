@@ -25,9 +25,20 @@ App({
 
   checkLoginStatus() {
     const userInfo = wx.getStorageSync('userInfo')
-    if (userInfo && userInfo._id) {
+    const openid = wx.getStorageSync('openid')
+    // 必须同时有 openid 和 userInfo 才算登录态有效
+    if (userInfo && userInfo._id && openid) {
       this.globalData.userInfo = userInfo
+      this.globalData.openid = openid
       this.globalData.isLogin = true
+    } else {
+      // 清除残留数据，避免各页面误判为已登录
+      if (userInfo && !openid) {
+        wx.removeStorageSync('userInfo')
+      }
+      this.globalData.userInfo = null
+      this.globalData.isLogin = false
+      this.globalData.openid = ''
     }
   },
 
@@ -44,6 +55,7 @@ App({
         wx.hideLoading()
         if (res.result && res.result.openid) {
           this.globalData.openid = res.result.openid
+          wx.setStorageSync('openid', res.result.openid)
           resolve(res.result)
         } else {
           // 云函数返回异常

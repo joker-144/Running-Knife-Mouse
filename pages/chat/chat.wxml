@@ -14,14 +14,16 @@
     <view class="message-list">
       <block wx:for="{{messages}}" wx:key="_id">
         <view class="message-row {{item.isTemp ? 'message-temp' : ''}}" id="msg-{{item._id}}">
-          <!-- 他人消息 -->
+          <!-- 他人消息（左侧） -->
           <view class="message-item message-left" wx:if="{{item.fromOpenid !== myOpenid}}">
+            <text class="message-sender text-xs text-muted mb-4">对方</text>
             <view class="message-bubble message-bubble-left">
               <text class="message-content">{{item.content}}</text>
             </view>
           </view>
-          <!-- 自己消息 -->
+          <!-- 自己消息（右侧） -->
           <view class="message-item message-right" wx:else>
+            <text class="message-sender text-xs text-accent mb-4" style="text-align:right;">我</text>
             <view class="message-bubble message-bubble-right">
               <text class="message-content">{{item.content}}</text>
             </view>

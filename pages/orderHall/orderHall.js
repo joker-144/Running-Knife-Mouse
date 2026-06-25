@@ -34,35 +34,33 @@ Page({
     // 筛选面板
     showFilterPanel: false,
     mapFilterIndex: -1,
-    userRole: 'boss'
+    userRole: 'boss',
+    isLogin: false
   },
 
   onLoad() {
     const userInfo = app.globalData.userInfo
-    this.setData({ userRole: userInfo?.role || 'boss' })
-    if (!app.globalData.openid) {
-      this.initApp()
-    }
+    this.setData({
+      userRole: userInfo?.role || 'boss',
+      isLogin: !!app.globalData.openid && !!userInfo
+    })
   },
 
   onShow() {
     const userInfo = app.globalData.userInfo
-    if (userInfo) {
-      this.setData({ userRole: userInfo.role || 'boss' })
-    }
-    if (app.globalData.openid) {
+    const isLogin = !!app.globalData.openid && !!userInfo
+    this.setData({
+      userRole: userInfo?.role || 'boss',
+      isLogin: isLogin
+    })
+    if (isLogin) {
       this.resetAndLoad()
     }
   },
 
-  async initApp() {
-    try {
-      await app.doLogin()
-      await app.fetchUserInfo()
-      this.loadOrders()
-    } catch (err) {
-      console.error('初始化失败:', err)
-    }
+  // 手动登录
+  startLogin() {
+    wx.switchTab({ url: '/pages/index/index' })
   },
 
   // 重置并加载
@@ -127,11 +125,12 @@ Page({
   },
 
   // 地图筛选
-  onMapFilterChange(e) {
-    const index = e.detail.value
+  onMapSelect(e) {
+    const index = parseInt(e.currentTarget.dataset.index)
+    const map = index === -1 ? '' : env.MAP_LIST[index]
     this.setData({
       mapFilterIndex: index,
-      'filters.map': env.MAP_LIST[index]
+      'filters.map': map
     })
     this.resetAndLoad()
   },
