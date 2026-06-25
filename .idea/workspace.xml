@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6898971f-03b2-462b-a924-9821c2325cb7" name="Changes" comment="内容修改">
+    <list default="true" id="6898971f-03b2-462b-a924-9821c2325cb7" name="Changes" comment="bug修复">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/env.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/app.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/status-tag/status-tag.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/components/status-tag/status-tag.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/chat/chat.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/chat/chat.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index/index.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index/index.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/orderDetail/orderDetail.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/orderDetail/orderDetail.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/orderHall/orderHall.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/orderHall/orderHall.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/orderPublish/orderPublish.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/orderPublish/orderPublish.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile/profile.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/profile.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/verify/verify.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/verify/verify.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/withdraw/withdraw.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/withdraw/withdraw.wxss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,37 +26,37 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "joker-144"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;joker-144&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/joker-144/Running-Knife-Mouse.git",
-    "accountId": "1e24495d-5947-4923-b5cd-8f72f098a8cd"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/joker-144/Running-Knife-Mouse.git&quot;,
+    &quot;accountId&quot;: &quot;1e24495d-5947-4923-b5cd-8f72f098a8cd&quot;
   }
-}]]></component>
+}</component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0011533131459274" />
-      <entry key="MS500" value="1.258457684061991" />
-      <entry key="S2" value="1.7130128586820703" />
-      <entry key="S5" value="1.8734518013925574" />
-      <entry key="S10" value="1.9345864333450158" />
-      <entry key="S30" value="1.9777019712371047" />
-      <entry key="S60" value="1.9887881326336316" />
-      <entry key="M2" value="1.9943782643610186" />
-      <entry key="M5" value="1.9977475018624913" />
-      <entry key="M10" value="1.998873115997468" />
-      <entry key="M15" value="1.9992486028312042" />
-      <entry key="M30" value="1.9996242308143617" />
-      <entry key="H1" value="1.9998120977535536" />
-      <entry key="H2" value="1.9999060444629553" />
-      <entry key="H4" value="1.9999530211279706" />
-      <entry key="D1" value="1.9999921700347256" />
-      <entry key="W1" value="1.9999988814297787" />
+      <entry key="MS100" value="1.0000000000712108" />
+      <entry key="MS500" value="1.0181252879477982" />
+      <entry key="S2" value="1.810014405514845" />
+      <entry key="S5" value="2.7713553973104643" />
+      <entry key="S10" value="3.3039750780987034" />
+      <entry key="S30" value="3.746968363169482" />
+      <entry key="S60" value="3.870653497261403" />
+      <entry key="M2" value="3.9346028880259594" />
+      <entry key="M5" value="3.9736653130019075" />
+      <entry key="M10" value="3.986803171319951" />
+      <entry key="M15" value="3.9911955486886" />
+      <entry key="M30" value="3.995594488259989" />
+      <entry key="H1" value="3.997796421985448" />
+      <entry key="H2" value="3.998898005378601" />
+      <entry key="H4" value="3.999448951276018" />
+      <entry key="D1" value="3.9999081514044414" />
+      <entry key="W1" value="3.999986878597157" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -69,53 +78,53 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9670503559911234" />
-      <entry key="MS500" value="1.2497648818670355" />
-      <entry key="S2" value="1.7100470040583007" />
-      <entry key="S5" value="1.8721536735073232" />
-      <entry key="S10" value="1.9339160729504188" />
-      <entry key="S30" value="1.977473511342828" />
-      <entry key="S60" value="1.988673259044104" />
-      <entry key="M2" value="1.994320665289831" />
-      <entry key="M5" value="1.9977244231116598" />
-      <entry key="M10" value="1.9988615700869417" />
-      <entry key="M15" value="1.9992409041041814" />
-      <entry key="M30" value="1.9996203807239077" />
-      <entry key="H1" value="1.9998101725265398" />
-      <entry key="H2" value="1.9999050818039952" />
-      <entry key="H4" value="1.9999525397871265" />
-      <entry key="D1" value="1.999992089809673" />
-      <entry key="W1" value="1.9999988699690183" />
+      <entry key="MS100" value="0.9012504626610147" />
+      <entry key="MS500" value="0.9965396772600298" />
+      <entry key="S2" value="1.7952286456878859" />
+      <entry key="S5" value="2.761289933984537" />
+      <entry key="S10" value="3.2978351497572995" />
+      <entry key="S30" value="3.744620235630672" />
+      <entry key="S60" value="3.869437728790765" />
+      <entry key="M2" value="3.9339842528338487" />
+      <entry key="M5" value="3.973415236085468" />
+      <entry key="M10" value="3.9866776921268636" />
+      <entry key="M15" value="3.991111797684247" />
+      <entry key="M30" value="3.995552563586208" />
+      <entry key="H1" value="3.9977754473430567" />
+      <entry key="H2" value="3.998887514979454" />
+      <entry key="H4" value="3.9994437053067595" />
+      <entry key="D1" value="3.999907276969314" />
+      <entry key="W1" value="3.9999867536752345" />
     </decayedShown>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8,
-  "fromUser": false
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3FZouUSNAfzaSKzlWBLWwHy2Rp3" />
   <component name="ProjectViewState">
     <option name="flattenModules" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Study/Running-Knife-Mouse",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Study/Running-Knife-Mouse&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -132,6 +141,7 @@
       <option name="presentableId" value="Default" />
       <updated>1782292174398</updated>
       <workItem from="1782292175443" duration="2314000" />
+      <workItem from="1782355686344" duration="631000" />
     </task>
     <task id="LOCAL-00001" summary="跑刀鼠初始版本v1.0">
       <option name="closed" value="true" />
@@ -165,7 +175,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782293151389</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="bug修复">
+      <option name="closed" value="true" />
+      <created>1782355718444</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1782355718444</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,6 +192,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="跑刀鼠初始版本v1.0" />
     <MESSAGE value="内容修改" />
-    <option name="LAST_COMMIT_MESSAGE" value="内容修改" />
+    <MESSAGE value="bug修复" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug修复" />
   </component>
 </project>

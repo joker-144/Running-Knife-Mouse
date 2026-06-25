@@ -3,8 +3,8 @@
 .balance-card {
   margin: 24rpx;
   padding: 40rpx 32rpx;
-  background: linear-gradient(135deg, rgba(245,166,35,0.15), rgba(245,166,35,0.05));
-  border: 1px solid rgba(245,166,35,0.2);
+  background: linear-gradient(135deg, rgba(77, 159, 255,0.15), rgba(77, 159, 255,0.05));
+  border: 1px solid rgba(77, 159, 255,0.2);
   border-radius: var(--border-radius);
 }
 

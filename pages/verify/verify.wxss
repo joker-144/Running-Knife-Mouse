@@ -4,7 +4,7 @@
   height: 100vh;
 }
 
-/* 认证状态卡片 */
+/* 认证状态卡�?*/
 .verify-card {
   display: flex;
   flex-direction: column;
@@ -23,8 +23,8 @@
 }
 
 .verify-pending {
-  background: linear-gradient(135deg, rgba(245,166,35,0.1), rgba(245,166,35,0.05));
-  border-color: rgba(245,166,35,0.3);
+  background: linear-gradient(135deg, rgba(77, 159, 255,0.1), rgba(77, 159, 255,0.05));
+  border-color: rgba(77, 159, 255,0.3);
 }
 
 .verify-rejected {

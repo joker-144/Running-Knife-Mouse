@@ -15,14 +15,14 @@
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "跑刀鼠",
-    "navigationBarBackgroundColor": "#0A0E17",
+    "navigationBarBackgroundColor": "#0A0F1A",
     "navigationStyle": "default",
-    "backgroundColor": "#0A0E17"
+    "backgroundColor": "#0A0F1A"
   },
   "tabBar": {
-    "color": "#A0B0C0",
-    "selectedColor": "#F5A623",
-    "backgroundColor": "#151E2C",
+    "color": "#6B7685",
+    "selectedColor": "#4D9FFF",
+    "backgroundColor": "#141929",
     "borderStyle": "black",
     "list": [
       {

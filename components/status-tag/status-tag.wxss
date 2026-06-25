@@ -1,4 +1,4 @@
-/* components/status-tag/status-tag.wxss - 状态标签样式 */
+/* components/status-tag/status-tag.wxss - 状态标签样�?*/
 
 .status-tag {
   display: inline-flex;

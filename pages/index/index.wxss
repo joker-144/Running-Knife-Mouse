@@ -12,7 +12,7 @@
   align-items: center;
 }
 
-/* 轮播图 */
+/* 轮播�?*/
 .banner-swiper {
   width: 692rpx;
   height: 280rpx;
@@ -24,7 +24,7 @@
 .banner-item {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #1A2435, #151E2C);
+  background: linear-gradient(135deg, #1A2032, #141929);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,7 +40,7 @@
   display: block;
   font-size: 36rpx;
   font-weight: 700;
-  color: #F5A623;
+  color: #4D9FFF;
   margin-bottom: 12rpx;
 }
 
@@ -129,7 +129,7 @@
   padding: 0 24rpx;
 }
 
-/* 未登录界面 */
+/* 未登录界�?*/
 .login-banner {
   display: flex;
   flex-direction: column;
@@ -168,7 +168,7 @@
 
 .modal-box {
   width: 580rpx;
-  background: #1A2435;
+  background: #1A2032;
   border-radius: 16rpx;
   border: 1px solid #2A3A50;
   overflow: hidden;
@@ -235,6 +235,6 @@
 }
 
 .modal-btn-confirm {
-  color: #F5A623;
+  color: #4D9FFF;
   font-weight: 600;
 }

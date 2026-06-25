@@ -2,19 +2,19 @@
 
 /* 主题色变量 */
 page {
-  --bg-primary: #0A0E17;
-  --bg-card: #151E2C;
-  --bg-card-hover: #1A2435;
-  --accent: #F5A623;
-  --accent-light: rgba(245, 166, 35, 0.15);
-  --success: #2ECC71;
-  --danger: #E74C3C;
-  --warning: #F39C12;
-  --info: #3498DB;
-  --text-primary: #FFFFFF;
-  --text-secondary: #A0B0C0;
-  --text-muted: #5A6A7A;
-  --border-color: rgba(255, 255, 255, 0.08);
+  --bg-primary: #0A0F1A;
+  --bg-card: #141929;
+  --bg-card-hover: #1A2032;
+  --accent: #4D9FFF;
+  --accent-light: rgba(77, 159, 255, 0.15);
+  --success: #00C781;
+  --danger: #FF5252;
+  --warning: #FFB547;
+  --info: #4D9FFF;
+  --text-primary: #EAECF0;
+  --text-secondary: #8892A4;
+  --text-muted: #4E5566;
+  --border-color: rgba(255, 255, 255, 0.06);
   --border-radius: 16rpx;
   --border-radius-sm: 8rpx;
 
